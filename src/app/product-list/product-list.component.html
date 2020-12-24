@@ -1,0 +1,6 @@
+<h3>Liste des produits</h3>
+<ul class="liste-produits">
+	<li (click)="onChose(produit)" *ngFor="let produit of produits">
+		<span class="mon-produit">{{ produit.id }}</span> {{ produit.name }}
+	</li>
+</ul>
