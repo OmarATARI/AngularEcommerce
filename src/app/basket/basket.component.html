@@ -1,3 +1,9 @@
-<p>
-	basket works!
-</p>
+<h3>Panier</h3>
+<div class="panier" *ngFor="let produit of produits">
+  <h4>{{ produit.name | titlecase }}</h4>
+	<p>{{ produit.price | currency:'EUR'}}</p>
+</div>
+
+<div class="total-price">
+  <p *ngIf="totalPrice != 0">Prix du panier: {{ totalPrice | currency:'EUR'}}</p>
+</div>

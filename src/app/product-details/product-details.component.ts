@@ -10,8 +10,8 @@ import { ProductsService } from '../products.service';
 export class ProductDetailsComponent implements OnInit {
 
 	public productId: number;
-	//private name: any;
 
+  private product: any;
   private id: number;
   private name: string;
   private price: number;
@@ -29,6 +29,7 @@ export class ProductDetailsComponent implements OnInit {
 
   getCurrentProductData(){
     this.productsSource.getProducts(this.productId).subscribe(produit => {
+      this.product = produit;
       this.id = produit.id;
       this.name = produit.name;
       this.price = produit.price;
@@ -55,7 +56,11 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   buyProduct(){
-    this.quantity = this.productsSource.updateQuantity(this.id, this.quantity)
-    this.price = this.productsSource.updatePrice(this.id, this.price)
+    if (this.product.quantity == 0){
+      return false;
+    }
+    this.productsSource.saveSoldProduct(this.product);
+    this.quantity = this.productsSource.updateQuantity(this.id);
+    this.price = this.productsSource.updatePrice(this.id);
   }
 }

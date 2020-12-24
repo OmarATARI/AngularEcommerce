@@ -1,6 +1,9 @@
 <h3>Liste des produits</h3>
-<ul class="liste-produits">
-	<li (click)="onChose(produit)" *ngFor="let produit of produits">
-		<span class="mon-produit">{{ produit.id }}</span> {{ produit.name }} {{ produit.price }} {{ produit.quantity }}
+<ul (click)="onChose(produit)" *ngFor="let produit of produits" class="liste-produits">
+	<li>
+		<span class="mon-produit">{{ produit.id }}</span> {{ produit.name }}
 	</li>
+  <li>Prix: {{ produit.price | currency:'EUR'}}</li>
+  <li>Quantité: {{ produit.quantity }}</li>
+  <img class="images" src="{{ produit.imageSource }}"/>
 </ul>

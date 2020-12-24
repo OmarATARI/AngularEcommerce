@@ -2,7 +2,8 @@
   <h3>{{ this.name }}</h3>
 
   <p>Prix: {{ this.price | currency:'EUR'}}</p>
-  <p>Quanité: {{ this.quantity }}</p>
+  <p *ngIf="quantity > 0">Quantité: {{ this.quantity }}</p>
+  <p *ngIf="quantity == 0" [ngStyle]="{color:'red'}">Quantité: Rupture de stock</p>
   <p>Description: {{ this.description }}</p>
 </div>
 

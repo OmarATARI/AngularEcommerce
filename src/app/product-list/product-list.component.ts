@@ -5,8 +5,7 @@ import { ProductsService } from '../products.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styles: [
-  ]
+  styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
 
