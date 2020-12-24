@@ -9,27 +9,53 @@ import { ProductsService } from '../products.service';
 })
 export class ProductDetailsComponent implements OnInit {
 
-	public productId: any;
-	public productName: any;
-	private name: any;
+	public productId: number;
+	//private name: any;
 
-  constructor(private route: ActivatedRoute, private router: Router, private data: ProductsService) { }
+  private id: number;
+  private name: string;
+  private price: number;
+  private quantity: number;
+  private description: string;
+
+  constructor(private route: ActivatedRoute, private router: Router, private productsSource: ProductsService) { }
 
   ngOnInit(): void {
-		this.data.currentName.subscribe((name: any) => this.name = name)
-		this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.productId = +params['id'];
-			this.productName = +params['name'];
+    });
+    this.getCurrentProductData()
+  }
+
+  getCurrentProductData(){
+    this.productsSource.getProducts(this.productId).subscribe(produit => {
+      this.id = produit.id;
+      this.name = produit.name;
+      this.price = produit.price;
+      this.quantity = produit.quantity;
+      this.description = produit.description;
     });
   }
 
 	goPrevious(){
-		let previousId = this.productId - 1;
-		this.router.navigate(['/products', previousId])
+    if(this.productId > 0 && this.productId < 4){
+      console.log("productId == " + this.productId)
+      let previousId = this.productId - 1;
+      this.router.navigate(['/products', previousId])
+      this.ngOnInit();
+    }
 	}
 
 	goNext(){
-		let nextId = this.productId + 1;
-		this.router.navigate(['/products', nextId])
-	}
+    if(this.productId > 0 && this.productId < 4){
+  		let nextId = this.productId + 1;
+  		this.router.navigate(['/products', nextId])
+      this.ngOnInit();
+  	}
+  }
+
+  buyProduct(){
+    this.quantity = this.productsSource.updateQuantity(this.id, this.quantity)
+    this.price = this.productsSource.updatePrice(this.id, this.price)
+  }
 }

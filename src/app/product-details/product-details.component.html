@@ -1,8 +1,13 @@
-<h3>
-	Product id is {{ productId }}
-	Product name is {{ productName }}
-	name shared is {{ name }}
-</h3>
+<div class="product-details">
+  <h3>{{ this.name }}</h3>
 
-<a (click)="goPrevious()">Précédant</a>
-<a (click)="goNext()">Suivant</a>
+  <p>Prix: {{ this.price | currency:'EUR'}}</p>
+  <p>Quanité: {{ this.quantity }}</p>
+  <p>Description: {{ this.description }}</p>
+</div>
+
+<a (click)="buyProduct()">Acheter</a>
+
+
+<!-- <a (click)="goPrevious()">Précédant</a>
+<a (click)="goNext()">Suivant</a> -->
